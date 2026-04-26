@@ -4,30 +4,30 @@
 https://github.com/joao-zanutto/Fechadura-Eletrica-WiFi/assets/11475695/eda2953e-1172-402a-984b-237fb1f6270f
 
 
-# Fechadura-WebServer
-Sistema desenvolvido com a placa de desenvolvimento ESP-32 para a disciplina de Eletronica para a Computacao do professor Eduardo Simoes.
+# Electronic Lock Prototype
+System architecturd with the ESP32 development board for the Electronics class that is part of the Bachelor's in CS program at University of São Paulo (USP).
 
-## O Projeto:
+## The project:
 
-O projeto foi desenvolvido tendo em mente uma ferramenta para uso diario que facilitaria algum aspecto do meu dia. Por conta disso escolhi fazer um web server que posta o HTML por meio de println para o cliente. O projeto teve como base um projeto encontrado na internet que era responsavel por fazer o acionamento de um LED e entao ele foi adaptado para ser usado com um modulo de rele que faz o chaveamento da fonte da fechadura de portao HDL
+The project was designed with the objective of building a working prototype for a Smart Electronic Lock that could be remotelly activated. To achieve this I've chosed to host a web server directly in the development board, making the project extremelly simple, but prone to vulnerabilities as no security mechanisms were addressed during the project development.
 
-## A Montagem:
-1- Placa desenvolvimento ESP-32\
-1- Modulo Rele 1 via\
-1- Cabo PP 10 metros\
-1- Fonte chinesa de procedencia duvidosa\
-Alguns Jumpers
+## The setup:
+1- ESP32 development board\
+1- Relay module\
+1- PP Cable 10 meters\
+1- AC adaptar\
+Some Jumpers
 
-O circuito funciona de forma bem simples ligando o modulo de rele a ESP-32 em 3 pontos:\
-ESP-32 | Modulo Rele\
+The circuit works in a very simple way, connecting the relay module to the ESP32 board in 3 different pins:\
+ESP-32 | Relay Module\
 3V3====| VCC\
 GND====| GND\
 GPIO4==| IN
 
-E apos isso o fio positivo da fonte foi ligado ao comum do rele e o negativo direto na ponta preta do cabo PP. A ponta vermelha do cabo PP foi ligado ao conector normalmente fechado do rele e ambas outras extremidades ligadas em seus polos correspondentes na fechadura HDL
+Also, the positive wire from the AC source must be connected to the relay common, and the negative should be connected directly to the black wire on the PP cable. The red wire from the PP cable was plugged to the relay connector that is usually closed, and both remaining extremities connected to their correspondent poles in the commercial HDL electronic lock.
 
-## O Codigo:
+## The Code:
 
-O codigo contido na ESP eh simples e eh responsavel por se conectar a uma rede Wi-Fi, imprimir seu IP para a maquina conectada por meio de um monitor serial, abrir um servidor Web local e aguardar por requisicoes. Quando chega uma requisicao pelo IP da ESP ela serve uma pagina que possui um botao "Abrir" que quando apertado faz uma requisicao para a placa com endereco final =/26 (era o pino utilizado pelo projeto base para acender um LED) e por meio disso um if eh acionado no loop da placa que realiza o acionamento do rele e o desarme do mesmo depois de 1 segundo.
+The code is all embedded in the ESP32 board and is extremelly simple. It'll first connect to a pre-defined WiFi network, print its IP to the connected workstation via serial monitor, and then will open up a local web server and wait for requests. Whenever a request comes in to the board IP, it'll serve a page with a single button labeled "Abrir" (Open). Whenever the button is pressed by the user, it should trigger a new requisiton to the board that will end up activating the relay module, which will open the lock, and then disarm the relay after 1 second.
 
 https://drive.google.com/open?id=1Kkgbdy1Nei6g84ACyjCBLXT5Bhxe0Kb0
